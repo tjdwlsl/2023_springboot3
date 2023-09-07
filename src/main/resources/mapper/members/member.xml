@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="package com.ict.edu3.mapper.memebers.Member_Mapper">
+    <select id="getList" resultType="com.ict.edu2.member.vo.MemberVO">
+      select * from members order by m_idx asc
+    </select>
+
+    <select id="getIDCnt" parameterType ="String" resultType="int">
+      select count(*) from members where m_id = #{m_id}
+    </select>
+
+    <select id="getMemberOne"  parameterType="String" resultType="com.ict.edu2.member.vo.MemberVO">
+      select * from members where m_id = #{m_id}
+    </select>
+
+    <insert id="getMemberAdd" parameterType="com.ict.edu2.member.vo.MemberVO">
+      insert into members(m_id, m_pw, m_name,
+      <if test="m_age != null and m_age != ''">
+      m_age,
+      </if>
+       m_reg)
+      values(#{m_id},#{m_pw},#{m_name},
+      <if test="m_age != null and m_age != ''">
+      #{m_age},
+      </if>
+      sysdate())
+    </insert>
+
+</mapper>
